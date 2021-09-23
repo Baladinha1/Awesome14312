@@ -1,12 +1,19 @@
 var server = require('./config/server')
 var app = server.app
 var porta = server.porta
+var conexao = server.conexao
+var documentos = server.documentos
 
 app.set('view engine', 'ejs')
 app.set('views', './views')
 
 app.get('/',(req,res)=>{
-    res.render('index')
+    conexao()
+    documentos.find().limit(4).sort({'_id':-1})
+    .then((documentos)=>{
+        console.log(documentos)
+        res.render('index',{documentos})
+    }) 
 })
 
 app.listen(porta)
