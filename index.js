@@ -9,7 +9,7 @@ app.set('views', './views')
 
 app.get('/',(req,res)=>{
     conexao()
-    documentos.find().limit(4).sort({'_id':-1})
+    documentos.find().limit(3).sort({'_id':-1})
     .then((documentos)=>{
         console.log(documentos)
         res.render('index',{documentos})
